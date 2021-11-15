@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id "me.champeau.jmh" version "0.6.6"
+}
+
+group = 'com.patotski'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    jmhImplementation 'org.apache.logging.log4j:log4j:2.14.1'
+    jmh 'org.apache.logging.log4j:log4j:2.14.1'
+    jmhCompileClasspath 'org.apache.logging.log4j:log4j:2.14.1'
+    jmh 'org.apache.logging.log4j:log4j:2.14.1'
+}
+
+
+jmh {
+    warmupIterations = 2
+    iterations = 5
+    fork = 1
+}
