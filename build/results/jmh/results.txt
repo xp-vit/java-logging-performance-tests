@@ -1,5 +1,0 @@
-Benchmark                                           Mode  Cnt          Score           Error  Units
-LogBenchmarksFinestLevel.logFormatedStrinSupplier  thrpt    5  924542701.222 ±  20147166.510  ops/s
-LogBenchmarksFinestLevel.logFormatedString         thrpt    5    4026242.131 ±    127501.969  ops/s
-LogBenchmarksFinestLevel.logString                 thrpt    5  933997180.560 ±  14577423.923  ops/s
-LogBenchmarksFinestLevel.logStringSupplier         thrpt    5  956472670.874 ± 160371779.855  ops/s
