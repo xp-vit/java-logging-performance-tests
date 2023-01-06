@@ -41,6 +41,13 @@ public class LoggerBenchmarks {
     public void logStringParameterized(LoggerBenchmarks.User user) {
         logger.debug("User: {} and {}", user.getName(), user.getSurname());
     }
+
+    @Benchmark
+    public void logStringIfDebug(LoggerBenchmarks.User user) {
+        if(logger.isDebugEnabled()){
+            logger.debug("User: {} and {}", user.getName(), user.getSurname());
+        }
+    }
     @Benchmark
     public void logStringSupplier(LoggerBenchmarks.User user) {
         logger.debug(() -> "User: "+user.getName() + " and " + user.getSurname());
