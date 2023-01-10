@@ -13,7 +13,7 @@ import static com.patotski.performance.utils.BenchmarkUtils.runBenchmark;
 public class IntToStringBenchmarks {
     @State(Scope.Benchmark)
     public static class IntHolder {
-        public int i = 1234;
+        public int i = 42424242;
     }
     @Benchmark
     public String toString(IntHolder mapHolder) {
