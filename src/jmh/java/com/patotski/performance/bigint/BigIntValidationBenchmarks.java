@@ -34,8 +34,9 @@ public class BigIntValidationBenchmarks {
     }
     @Benchmark
     public String exceptionValidation(BigIntState state) {
+        String stringToParse = state.getString();
         try {
-            state.bigInteger = new BigInteger(state.getString());
+            state.bigInteger = new BigInteger(stringToParse);
         } catch (NumberFormatException e) {
             return "invalid";
         }
