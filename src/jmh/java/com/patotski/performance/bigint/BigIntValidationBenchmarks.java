@@ -5,6 +5,7 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 
 import java.math.BigInteger;
+import java.util.regex.Pattern;
 
 import static com.patotski.performance.utils.BenchmarkUtils.runBenchmark;
 
@@ -16,8 +17,9 @@ public class BigIntValidationBenchmarks {
 
         public BigInteger bigInteger;
 
-        public String pattern = "\\d+";
+        public String stringPattern = "\\d+";
 
+        public Pattern pattern = Pattern.compile(stringPattern);
         private boolean flag = true;
         public String getString() {
             if (flag) {
@@ -41,7 +43,16 @@ public class BigIntValidationBenchmarks {
 
     @Benchmark
     public String regExpValidation(BigIntState state) {
-        if (state.invalid.matches(state.pattern)) {
+        if (state.getString().matches(state.stringPattern)) {
+            state.bigInteger = new BigInteger(state.getString());
+            return "valid";
+        }
+        return "invalid";
+    }
+
+    @Benchmark
+    public String regExpCompiledPatternValidation(BigIntState state) {
+        if (state.pattern.matcher(state.getString()).matches()) {
             state.bigInteger = new BigInteger(state.getString());
             return "valid";
         }
