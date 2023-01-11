@@ -17,9 +17,10 @@ public class BigIntValidationBenchmarks {
 
         public BigInteger bigInteger;
 
-        public String stringPattern = "\\d+";
+        public String stringPattern = "[0-9]+";
 
         public Pattern pattern = Pattern.compile(stringPattern);
+
         private boolean flag = true;
         public String getString() {
             if (flag) {
@@ -43,8 +44,9 @@ public class BigIntValidationBenchmarks {
 
     @Benchmark
     public String regExpValidation(BigIntState state) {
-        if (state.getString().matches(state.stringPattern)) {
-            state.bigInteger = new BigInteger(state.getString());
+        String stringToParse = state.getString();
+        if (stringToParse.matches(state.stringPattern)) {
+            state.bigInteger = new BigInteger(stringToParse);
             return "valid";
         }
         return "invalid";
@@ -52,8 +54,9 @@ public class BigIntValidationBenchmarks {
 
     @Benchmark
     public String regExpCompiledPatternValidation(BigIntState state) {
-        if (state.pattern.matcher(state.getString()).matches()) {
-            state.bigInteger = new BigInteger(state.getString());
+        String stringToParse = state.getString();
+        if (state.pattern.matcher(stringToParse).matches()) {
+            state.bigInteger = new BigInteger(stringToParse);
             return "valid";
         }
         return "invalid";
