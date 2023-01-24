@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashSet;
 
+import static com.patotski.performance.enums.EnumSetVsHashMapBenchmarks.TestEnum.*;
 import static com.patotski.performance.utils.BenchmarkUtils.runBenchmark;
 
 public class EnumSetVsHashMapBenchmarks {
@@ -20,20 +21,16 @@ public class EnumSetVsHashMapBenchmarks {
   public static class EnumHolder {
     public HashSet<TestEnum> hashSet;
     public EnumSet<TestEnum> enumSet;
-
-    @Setup
-    public void setup() {
-      hashSet = new HashSet<>(Arrays.asList(TestEnum.TWO, TestEnum.FOUR, TestEnum.SIX, TestEnum.EIGHT, TestEnum.TEN));
-      enumSet = EnumSet.of(TestEnum.TWO, TestEnum.FOUR, TestEnum.SIX, TestEnum.EIGHT, TestEnum.TEN);
-    }
   }
   @Benchmark
   public boolean hasSetContains(EnumHolder enumHolder) {
+    enumHolder.hashSet = new HashSet<>(Arrays.asList(ONE, TWO, FOUR, SIX, SEVEN, EIGHT, NINE, TEN));
     return enumHolder.hashSet.contains(TestEnum.TWO);
   }
 
   @Benchmark
   public boolean enumSet(EnumHolder enumHolder) {
+    enumHolder.enumSet = EnumSet.of(TestEnum.TWO, FOUR, TestEnum.SIX, TestEnum.EIGHT, TestEnum.TEN);
     return enumHolder.enumSet.contains(TestEnum.TWO);
   }
   public static void main(String[] args) throws Exception {
