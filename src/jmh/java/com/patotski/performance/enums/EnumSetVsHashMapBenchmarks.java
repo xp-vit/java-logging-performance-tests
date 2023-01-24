@@ -2,6 +2,7 @@ package com.patotski.performance.enums;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 
 import java.util.Arrays;
@@ -17,8 +18,14 @@ public class EnumSetVsHashMapBenchmarks {
   }
   @State(Scope.Benchmark)
   public static class EnumHolder {
-    public HashSet<TestEnum> hashSet = new HashSet<>(Arrays.asList(TestEnum.TWO, TestEnum.FOUR, TestEnum.SIX, TestEnum.EIGHT, TestEnum.TEN));
-    public EnumSet<TestEnum> enumSet = EnumSet.of(TestEnum.TWO, TestEnum.FOUR, TestEnum.SIX, TestEnum.EIGHT, TestEnum.TEN);
+    public HashSet<TestEnum> hashSet;
+    public EnumSet<TestEnum> enumSet;
+
+    @Setup
+    public void setup() {
+      hashSet = new HashSet<>(Arrays.asList(TestEnum.TWO, TestEnum.FOUR, TestEnum.SIX, TestEnum.EIGHT, TestEnum.TEN));
+      enumSet = EnumSet.of(TestEnum.TWO, TestEnum.FOUR, TestEnum.SIX, TestEnum.EIGHT, TestEnum.TEN);
+    }
   }
   @Benchmark
   public boolean hasSetContains(EnumHolder enumHolder) {
