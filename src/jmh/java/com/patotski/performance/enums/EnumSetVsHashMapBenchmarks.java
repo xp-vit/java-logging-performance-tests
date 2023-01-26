@@ -24,13 +24,13 @@ public class EnumSetVsHashMapBenchmarks {
   }
   @Benchmark
   public boolean hasSetContains(EnumHolder enumHolder) {
-    enumHolder.hashSet = new HashSet<>(Arrays.asList(ONE, TWO, FOUR, SIX, SEVEN, EIGHT, NINE, TEN));
+    enumHolder.hashSet = new HashSet<>(Arrays.asList(ONE, TWO, FOUR, SIX, EIGHT, TEN));
     return enumHolder.hashSet.contains(TestEnum.TWO);
   }
 
   @Benchmark
   public boolean enumSet(EnumHolder enumHolder) {
-    enumHolder.enumSet = EnumSet.of(TestEnum.TWO, FOUR, TestEnum.SIX, TestEnum.EIGHT, TestEnum.TEN);
+    enumHolder.enumSet = EnumSet.of(ONE, TWO, FOUR, SIX, EIGHT, TEN);
     return enumHolder.enumSet.contains(TestEnum.TWO);
   }
   public static void main(String[] args) throws Exception {
