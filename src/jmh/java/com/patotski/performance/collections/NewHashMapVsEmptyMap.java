@@ -9,7 +9,7 @@ import static com.patotski.performance.utils.BenchmarkUtils.runBenchmark;
 public class NewHashMapVsEmptyMap {
 
   @Benchmark
-  public Map emptyList() {
+  public Map emptyMap() {
     return Collections.emptyMap();
   }
 
