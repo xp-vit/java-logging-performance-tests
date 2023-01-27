@@ -23,6 +23,11 @@ public class NewHashMapVsEmptyMap {
     return new TreeMap();
   }
 
+  @Benchmark
+  public Map mapOf() {
+    return Map.of();
+  }
+
   public static void main(String[] args) throws Exception {
     runBenchmark(NewHashMapVsEmptyMap.class);
   }

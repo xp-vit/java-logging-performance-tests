@@ -23,6 +23,11 @@ public class NewListVsEmptyList {
     return new LinkedList();
   }
 
+  @Benchmark
+  public List listOf() {
+    return List.of();
+  }
+
   public static void main(String[] args) throws Exception {
     runBenchmark(NewListVsEmptyList.class);
   }

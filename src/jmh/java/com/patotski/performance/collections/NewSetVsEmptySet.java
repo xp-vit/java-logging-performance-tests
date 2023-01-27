@@ -23,6 +23,11 @@ public class NewSetVsEmptySet {
     return new TreeSet();
   }
 
+  @Benchmark
+  public Set setOf() {
+    return Set.of();
+  }
+
   public static void main(String[] args) throws Exception {
     runBenchmark(NewSetVsEmptySet.class);
   }
