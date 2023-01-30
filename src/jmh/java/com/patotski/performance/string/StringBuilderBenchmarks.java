@@ -22,11 +22,13 @@ public class StringBuilderBenchmarks {
   }
   @Benchmark
   public StringBuilder appendChar(InputStringHolder strHolder) {
+    strHolder.sb.delete(0, strHolder.sb.length());
     return strHolder.sb.append('a');
   }
 
   @Benchmark
   public StringBuilder appendStr(InputStringHolder strHolder) {
+    strHolder.sb.delete(0, strHolder.sb.length());
     return strHolder.sb.append("a");
   }
 
