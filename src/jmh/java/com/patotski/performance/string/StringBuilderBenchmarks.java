@@ -14,7 +14,6 @@ public class StringBuilderBenchmarks {
   public static class InputStringHolder {
     public StringBuilder sb;
 
-
     @Setup
     public void setup() {
       sb = new StringBuilder();
