@@ -10,11 +10,12 @@ public class BenchmarkUtils {
   public static void runBenchmark(Class<?> clazz) throws Exception {
     Options opt = new OptionsBuilder()
         .include(clazz.getSimpleName())
-        .resultFormat(ResultFormatType.JSON)
-        .result("reports/" + clazz.getSimpleName() + ".json")
-        .jvmArgsAppend("-Djmh.stack.period=1")
-        .warmupIterations(2)
-        .measurementIterations(10)
+            .resultFormat(ResultFormatType.JSON)
+            .shouldDoGC(true)
+            .result("reports/" + clazz.getSimpleName() + ".json")
+            .jvmArgsAppend("-Djmh.stack.period=1")
+            //.warmupIterations(2)
+            //.measurementIterations(10)
         .forks(1)
         .build();
 

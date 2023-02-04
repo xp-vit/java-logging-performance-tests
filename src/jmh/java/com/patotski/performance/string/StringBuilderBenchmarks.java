@@ -20,7 +20,7 @@ public class StringBuilderBenchmarks {
     }
   }
   @Benchmark
-  public StringBuilder appendChar(InputStringHolder strHolder) {
+  public StringBuilder appendWithStringBuilder(InputStringHolder strHolder) {
     strHolder.sb.delete(0, strHolder.sb.length());
     return strHolder.sb.append('a');
   }
