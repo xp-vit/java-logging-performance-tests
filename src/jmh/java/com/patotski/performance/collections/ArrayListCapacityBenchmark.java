@@ -17,41 +17,29 @@ import static com.patotski.performance.utils.BenchmarkUtils.runBenchmark;
 @Fork(1)
 public class ArrayListCapacityBenchmark {
 
-    @Param({"10", "100", "1000", "10000", "100000", "1000000"})
-    private int size;
+ @Param({"10", "100", "1000", "10000", "100000", "1000000"})
+ private int size;
 
 
-    public ArrayList<Integer> list;
-
-    @Setup
-    public void setup() {
-      list = new ArrayList<>(size);
-      for (int i = 0; i < size; i++) {
-        list.add(i);
-      }
-    }
 
   @Benchmark
   public ArrayList<Integer> withoutInitialCapacity() {
     final ArrayList<Integer> result = new ArrayList<>();
-    reverseListOrder(result);
-
+    for (int i = 0; i <= size; i++) {
+      result.add(i);
+    }
     return result;
   }
 
   @Benchmark
   public ArrayList<Integer> withInitialCapacity() {
     final ArrayList<Integer> result = new ArrayList<>(size);
-    reverseListOrder(result);
-
+    for (int i = 0; i <= size; i++) {
+      result.add(i);
+    }
     return result;
   }
 
-  private void reverseListOrder(List<Integer> result) {
-    for (int i = list.size() - 1; i >= 0; i--) {
-      result.add(list.get(i));
-    }
-  }
   public static void main(String[] args) throws Exception {
     runBenchmark(ArrayListCapacityBenchmark.class);
   }
