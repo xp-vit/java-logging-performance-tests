@@ -18,6 +18,7 @@ public class LoggerBenchmarks {
     static final Logger logger = LogManager.getLogger(LoggerBenchmarks.class);
     @State(Scope.Benchmark)
     public static class User{
+        
         private String name = "John";
         private String surname = "Doe";
 
