@@ -12,13 +12,13 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Benchmark)
 @BenchmarkMode({Mode.AverageTime})
 @Warmup(iterations = 2, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 5, timeUnit = TimeUnit.SECONDS)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Fork(1)
 public class StreamVsLoopsBenchmark {
   private List<Integer> list;
 
-  @Param({ "1000" })
+  @Param({ "100000" })
   private int size;
 
   @Setup
@@ -32,6 +32,15 @@ public class StreamVsLoopsBenchmark {
   @Benchmark
   public int stream() {
     return list.stream()
+        .filter(i -> i == -1)
+        .findAny()
+        .orElse(0);
+  }
+
+  @Benchmark
+  public int streamParallel() {
+    return list.stream()
+        .parallel()
         .filter(i -> i == -1)
         .findAny()
         .orElse(0);

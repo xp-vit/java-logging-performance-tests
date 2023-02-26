@@ -25,6 +25,11 @@ public class IntToStringBenchmarks {
     }
 
     @Benchmark
+    public String stringBuilder() {
+        return new StringBuilder().append(ThreadLocalRandom.current().nextInt()).toString();
+    }
+
+    @Benchmark
     public String stringValueOf() {
         return  String.valueOf(ThreadLocalRandom.current().nextInt());
     }

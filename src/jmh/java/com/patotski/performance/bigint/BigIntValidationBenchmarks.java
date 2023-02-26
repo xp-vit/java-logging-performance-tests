@@ -1,14 +1,20 @@
 package com.patotski.performance.bigint;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.*;
 
 import java.math.BigInteger;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import static com.patotski.performance.utils.BenchmarkUtils.runBenchmark;
 
+@State(Scope.Benchmark)
+@BenchmarkMode({Mode.AverageTime})
+@Warmup(iterations = 2, time = 1, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 5, timeUnit = TimeUnit.SECONDS)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@Fork(1)
 public class BigIntValidationBenchmarks {
     @State(Scope.Benchmark)
     public static class BigIntState {
@@ -21,13 +27,11 @@ public class BigIntValidationBenchmarks {
 
         public Pattern pattern = Pattern.compile(stringPattern);
 
-        private boolean flag = true;
         public String getString() {
-            if (flag) {
-                flag = false;
+            //5% of the time return invalid string
+            if (ThreadLocalRandom.current().nextInt(20)==1) {
                 return invalid;
             } else {
-                flag = true;
                 return valid;
             }
         }
@@ -43,7 +47,7 @@ public class BigIntValidationBenchmarks {
         return "valid";
     }
 
-    @Benchmark
+   /* @Benchmark
     public String regExpValidation(BigIntState state) {
         String stringToParse = state.getString();
         if (stringToParse.matches(state.stringPattern)) {
@@ -51,7 +55,7 @@ public class BigIntValidationBenchmarks {
             return "valid";
         }
         return "invalid";
-    }
+    }*/
 
     @Benchmark
     public String regExpCompiledPatternValidation(BigIntState state) {
