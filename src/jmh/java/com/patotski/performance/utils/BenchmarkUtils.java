@@ -5,9 +5,12 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
+import java.io.File;
+
 public class BenchmarkUtils {
 
   public static void runBenchmark(Class<?> clazz) throws Exception {
+    new File("reports").mkdirs();
     Options opt = new OptionsBuilder()
         .include(clazz.getSimpleName())
             .resultFormat(ResultFormatType.JSON)
